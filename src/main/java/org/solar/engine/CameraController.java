@@ -26,9 +26,18 @@ public class CameraController {
     }
 
     private void handleInput() {
-        Vector2i mousePosDelta = Input.getMousePosDelta();
-        rotation.y -= mousePosDelta.get(0) * sensitivity * 0.005;
-        rotation.x += mousePosDelta.get(1) * sensitivity * 0.005;
+        // Control the camera only when this key is down
+        if (Input.isKeyDown(GLFW_KEY_G)) {
+            Input.captureMouse(true);
+        }
+        if (Input.isKeyDown(GLFW_KEY_H)) {
+            Input.captureMouse(false);
+        }
+        if (Input.isKeyDown(67)) { // C key
+            Vector2i mousePosDelta = Input.getMousePosDelta();
+            rotation.y -= mousePosDelta.get(0) * sensitivity * 0.005;
+            rotation.x += mousePosDelta.get(1) * sensitivity * 0.005;
+        }
         if (Input.isKeyDown(265)) { // Up arrow
             rotation.x += 0.01f;
         }
@@ -59,7 +68,7 @@ public class CameraController {
         if (Input.isKeyDown(340)) { // Left shift
             offset.y -= 0.01f;
         }
-        if (Input.isKeyDown(67)) { // C key
+        if (Input.isKeyDown(79)) { // O key
             centreCamera();
         }
         if (Input.isKeyDown(80)) { // P key
